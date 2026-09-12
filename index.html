@@ -47,20 +47,19 @@
     </style>
 </head>
 <body>
-    <audio id="bg-music" loop>
-        <source src="https://upload.wikimedia.org/wikipedia/en/b/b4/Taylor_Swift_-_Lover_%28Official_Audio%29.ogg" type="audio/ogg">
-        <source src="https://dl.dropboxusercontent.com/scl/fi/taylor-swift-lover.mp3?rlkey=example" type="audio/mpeg">
+    <audio id="bg-music" loop preload="auto">
+        <source src="https://ia801503.us.archive.org/15/items/EdSheeranPerfect_201802/Ed%20Sheeran%20-%20Perfect.mp3" type="audio/mpeg">
     </audio>
     <div id="screen-envelope" class="screen active">
         <h1 class="title-script">Happy 26th Birthday!</h1>
         <div class="envelope-container" onclick="goToGreeting()">
-            <div class="envelope"><div class="wax-seal">💌</div></div>
+            <div class="envelope"><div class="wax-seal">🎀</div></div>
             <p class="instruction">Click the seal to open</p>
         </div>
     </div>
     <div id="screen-greeting" class="screen hidden">
         <div class="greeting-card">
-            <img src="Pic7.jpg" class="hero-img" alt="Srinal">
+            <img src="./Pic7.jpg" class="hero-img" alt="Srinal">
             <h1 class="title-script" style="color:#fff; margin-bottom:10px;">Happy Birthday Srinal! 🎉</h1>
             <p style="font-size: 1.1rem; color: #ffd1dc;">You are turning 26 today! Here is a little world built just for you 💖</p>
             <button class="btn-custom" onclick="goToMenu()">Click here for your gifts</button>
@@ -80,7 +79,7 @@
                 <p style="font-size:0.85rem; color:#666; margin-top:5px;">Sweet notes for you</p>
             </div>
             <div class="gift-card" onclick="openModal('music')">
-                <div class="gift-icon">🎵</div>
+                <div class="gift-icon">🎁</div>
                 <h3>Our Song</h3>
                 <p style="font-size:0.85rem; color:#666; margin-top:5px;">Lover by Taylor Swift</p>
             </div>
@@ -93,28 +92,57 @@
         </div>
     </div>
     <script>
-        function playMusic() { document.getElementById('bg-music').play().catch(e => console.log("Audio blocked")); }
-        function goToGreeting() { playMusic(); document.getElementById('screen-envelope').classList.replace('active', 'hidden'); document.getElementById('screen-greeting').classList.replace('hidden', 'active'); }
-        function goToMenu() { document.getElementById('screen-greeting').classList.replace('active', 'hidden'); document.getElementById('screen-menu').classList.replace('hidden', 'active'); }
+        const bgMusic = document.getElementById('bg-music');
+
+        function playMusic() { 
+            bgMusic.play().catch(e => console.log("Audio blocked")); 
+        }
+        
+        function pauseMusic() { 
+            bgMusic.pause(); 
+        }
+
+        function goToGreeting() { 
+            playMusic(); 
+            document.getElementById('screen-envelope').classList.replace('active', 'hidden'); 
+            document.getElementById('screen-greeting').classList.replace('hidden', 'active'); 
+        }
+
+        function goToMenu() { 
+            document.getElementById('screen-greeting').classList.replace('active', 'hidden'); 
+            document.getElementById('screen-menu').classList.replace('hidden', 'active'); 
+        }
+
         function openModal(type) {
             const modal = document.getElementById('modal');
             const content = document.getElementById('modal-content');
-            if (type === 'message') {
+            
+            if (type === 'music') {
+                pauseMusic(); // Lover open hote hi Perfect ruk jayega
+                content.innerHTML = `
+                    <div class="vinyl-container">
+                        <h2 class="title-script" style="color:#900c3f; font-size:2.5rem;">This Song Reminds Me of You 🎶</h2>
+                        <div class="vinyl-record"><div class="vinyl-center"></div></div>
+                        <h3 style="color:#333; margin-bottom:10px;">Lover — Taylor Swift</h3>
+                        <p style="color:#666; font-size:0.95rem; margin-bottom:20px;">"Can I go where you go? Could we always be this close...?"</p>
+                        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/1dGr1c8CrMLDpV6mPbImSI?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    </div>`;
+            } else if (type === 'message') {
                 content.innerHTML = `
                     <h2 class="title-script" style="color:#900c3f; font-size:2.5rem; text-align:center;">Happiest Birthday Srinal! 💖</h2>
                     <div class="main-letter">Happiest Birthday Meri Jaan .<br><br>I know last time I was with you but this time it's not the same but relax girl u will always be the best gift of my life 💓.<br><br>I am soo lucky to have u not only as my best friend but also someone whom I love the most and I want to cherish every day, every second, every year.<br><br>Love u Meri Janu 🩷</div>
                     <h3 style="color:#900c3f; margin-bottom:15px; text-align:center;">Our Memories Gallery 📸</h3>
                     <div class="gallery-grid">
-                        <div class="polaroid"><img src="Pic1.jpg"><p class="caption-text">Taking my most precious person to the place I love the most . Best pic😇</p></div>
-                        <div class="polaroid"><img src="Pic2.jpg"><p class="caption-text">Sunshine 🌞 🩷 Sweet cheeks</p></div>
-                        <div class="polaroid"><img src="Pic3.jpg"><p class="caption-text">Chatorees In Chandani Chowk 😋</p></div>
-                        <div class="polaroid"><img src="Pic4.jpg"><p class="caption-text">🌸♾️💕</p></div>
-                        <div class="polaroid"><img src="Pic5.jpg"><p class="caption-text">Busy in booking my heart 🩷</p></div>
-                        <div class="polaroid"><img src="Pic6.jpg"><p class="caption-text">Meri Sanskari Sundari 🎀</p></div>
-                        <div class="polaroid"><img src="Pic7.jpg"><p class="caption-text">Sexy gurl slaying every night 🌸</p></div>
-                        <div class="polaroid"><img src="Pic8.jpg"><p class="caption-text">Pretty girl I want to see every morning 💐</p></div>
-                        <div class="polaroid"><img src="Pic9.jpg"><p class="caption-text">Mohabaat Zindabad ♾️</p></div>
-                        <div class="polaroid"><img src="Pic10.jpg"><p class="caption-text">Reflection is enough to claim my right on the most gorgeous girl in the town 💗</p></div>
+                        <div class="polaroid"><img src="./Pic1.jpg"><p class="caption-text">Taking my most precious person to the place I love the most . Best pic😇</p></div>
+                        <div class="polaroid"><img src="./Pic2.jpg"><p class="caption-text">Sunshine 🌞 🩷 Sweet cheeks</p></div>
+                        <div class="polaroid"><img src="./Pic3.jpg"><p class="caption-text">Chatorees In Chandani Chowk 😋</p></div>
+                        <div class="polaroid"><img src="./Pic4.jpg"><p class="caption-text">🌸♾️💕</p></div>
+                        <div class="polaroid"><img src="./Pic5.jpg"><p class="caption-text">Busy in booking my heart 🩷</p></div>
+                        <div class="polaroid"><img src="./Pic6.jpg"><p class="caption-text">Meri Sanskari Sundari 🎀</p></div>
+                        <div class="polaroid"><img src="./Pic7.jpg"><p class="caption-text">Sexy gurl slaying every night 🌸</p></div>
+                        <div class="polaroid"><img src="./Pic8.jpg" onerror="this.src='./pic8.jpg'"><p class="caption-text">Pretty girl I want to see every morning 💐</p></div>
+                        <div class="polaroid"><img src="./Pic9.jpg"><p class="caption-text">Mohabaat Zindabad ♾️</p></div>
+                        <div class="polaroid"><img src="./Pic10.jpg"><p class="caption-text">Reflection is enough to claim my right on the most gorgeous girl in the town 💗</p></div>
                     </div>
                     <h3 style="color:#900c3f; margin:25px 0 15px 0; text-align:center;">Special Messages 📜</h3>
                     <div class="side-quotes">
@@ -128,13 +156,16 @@
                     </div>`;
             } else if (type === 'flower') {
                 content.innerHTML = `<div class="flower-container"><h2 class="title-script" style="color:#900c3f; font-size:2.5rem;">A Bouquet of Love for Srinal 🌻🌸</h2><div class="bouquet-img">💐</div><div class="wishes-grid"><div class="wish-card">✨ You are turning 26 today and glowing brighter than ever!</div><div class="wish-card">💖 Your smile has the magic to light up the darkest room.</div><div class="wish-card">🌟 You are unique, kind, and genuinely irreplaceable.</div><div class="wish-card">🎂 May this 26th year bring you boundless happiness & dreams come true!</div><div class="wish-card">🌷 You are capable of achieving everything your heart desires.</div><div class="wish-card">🎀 Staying true to yourself is your biggest superpower.</div></div></div>`;
-            } else if (type === 'music') {
-                content.innerHTML = `<div class="vinyl-container"><h2 class="title-script" style="color:#900c3f; font-size:2.5rem;">This Song Reminds Me of You 🎶</h2><div class="vinyl-record"><div class="vinyl-center"></div></div><h3 style="color:#333; margin-bottom:10px;">Lover — Taylor Swift</h3><p style="color:#666; font-size:0.95rem; margin-bottom:20px;">"Can I go where you go? Could we always be this close...?"</p><iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/1dGr1c8CrMLDpV6mPbImSI?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>`;
             }
             modal.classList.add('open');
         }
-        function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+        function closeModal() { 
+            document.getElementById('modal').classList.remove('open'); 
+            playMusic(); // Lover band karte hi Perfect dubara play ho jayega
+        }
     </script>
 </body>
 </html>
+
 
