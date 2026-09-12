@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+                      <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -48,12 +48,12 @@
 </head>
 <body>
     <audio id="bg-music" loop preload="auto">
-        <source src="https://ia801503.us.archive.org/15/items/EdSheeranPerfect_201802/Ed%20Sheeran%20-%20Perfect.mp3" type="audio/mpeg">
+        <source src="https://files.catbox.moe/k3z3vg.mp3" type="audio/mpeg">
     </audio>
     <div id="screen-envelope" class="screen active">
         <h1 class="title-script">Happy 26th Birthday!</h1>
         <div class="envelope-container" onclick="goToGreeting()">
-            <div class="envelope"><div class="wax-seal">🎀</div></div>
+            <div class="envelope"><div class="wax-seal">🌸</div></div>
             <p class="instruction">Click the seal to open</p>
         </div>
     </div>
@@ -79,7 +79,7 @@
                 <p style="font-size:0.85rem; color:#666; margin-top:5px;">Sweet notes for you</p>
             </div>
             <div class="gift-card" onclick="openModal('music')">
-                <div class="gift-icon">🎁</div>
+                <div class="gift-icon">🎵</div>
                 <h3>Our Song</h3>
                 <p style="font-size:0.85rem; color:#666; margin-top:5px;">Lover by Taylor Swift</p>
             </div>
@@ -95,11 +95,17 @@
         const bgMusic = document.getElementById('bg-music');
 
         function playMusic() { 
-            bgMusic.play().catch(e => console.log("Audio blocked")); 
+            if (bgMusic) {
+                bgMusic.play().then(() => {
+                    console.log("Music playing successfully");
+                }).catch(e => console.log("Audio blocked:", e)); 
+            }
         }
         
         function pauseMusic() { 
-            bgMusic.pause(); 
+            if (bgMusic) {
+                bgMusic.pause(); 
+            }
         }
 
         function goToGreeting() { 
@@ -162,10 +168,8 @@
 
         function closeModal() { 
             document.getElementById('modal').classList.remove('open'); 
-            playMusic(); // Lover band karte hi Perfect dubara play ho jayega
+            playMusic(); // Lover close hote hi Perfect resume hoga
         }
     </script>
 </body>
 </html>
-
-
