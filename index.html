@@ -47,9 +47,13 @@
     </style>
 </head>
 <body>
+    <!-- Multi-source Audio Fallback: Pehle local file aur secondary working cloud stream link -->
     <audio id="bg-music" loop preload="auto">
+        <source src="perfect.mp3" type="audio/mpeg">
         <source src="./perfect.mp3" type="audio/mpeg">
+        <source src="https://files.catbox.moe/k3z3vg.mp3" type="audio/mpeg">
     </audio>
+
     <div id="screen-envelope" class="screen active">
         <h1 class="title-script">Happy 26th Birthday!</h1>
         <div class="envelope-container" onclick="goToGreeting()">
@@ -96,9 +100,17 @@
 
         function playMusic() { 
             if (bgMusic) {
-                bgMusic.play().then(() => {
-                    console.log("Music playing successfully");
-                }).catch(e => console.log("Audio blocked:", e)); 
+                bgMusic.currentTime = bgMusic.currentTime || 0;
+                let playPromise = bgMusic.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        console.log("Audio playing perfectly!");
+                    }).catch(error => {
+                        console.log("Autoplay blocked/failed, trying reload:", error);
+                        bgMusic.load();
+                        bgMusic.play();
+                    });
+                }
             }
         }
         
@@ -115,6 +127,7 @@
         }
 
         function goToMenu() { 
+            playMusic();
             document.getElementById('screen-greeting').classList.replace('active', 'hidden'); 
             document.getElementById('screen-menu').classList.replace('hidden', 'active'); 
         }
@@ -124,7 +137,7 @@
             const content = document.getElementById('modal-content');
             
             if (type === 'music') {
-                pauseMusic(); // Lover open hote hi Perfect ruk jayega
+                pauseMusic(); // Lover open hote hi Perfect pause hoga
                 content.innerHTML = `
                     <div class="vinyl-container">
                         <h2 class="title-script" style="color:#900c3f; font-size:2.5rem;">This Song Reminds Me of You 🎶</h2>
@@ -168,8 +181,9 @@
 
         function closeModal() { 
             document.getElementById('modal').classList.remove('open'); 
-            playMusic(); // Lover close hote hi Perfect resume hoga
+            playMusic(); // Lover popup band hote hi Perfect phir se chal jayega
         }
     </script>
 </body>
 </html>
+
