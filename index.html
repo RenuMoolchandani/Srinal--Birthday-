@@ -1,4 +1,5 @@
-⁶<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -48,11 +49,11 @@
 </head>
 <body>
 
-    <!-- Direct Cloud Backup Stream Link for Ed Sheeran - Perfect -->
+    <!-- Updated audio sources to match the exact uploaded filename from your GitHub screenshot -->
     <audio id="bg-music" loop playsinline preload="auto">
         <source src="https://files.catbox.moe/k3z3vg.mp3" type="audio/mpeg">
-        <source src="perfec.l.mp3" type="audio/mpeg">
-        <source src="perfect.mp3" type="audio/mpeg">
+        <source src="Edd_Sheeran_-_Perfect_(mp3.pm).mp3.mp3" type="audio/mpeg">
+        <source src="Edd_Sheeran_-_Perfect_(mp3.pm).mp3" type="audio/mpeg">
     </audio>
 
     <div id="screen-envelope" class="screen active">
@@ -107,9 +108,9 @@
                     playPromise.then(() => {
                         console.log("Audio playing perfectly!");
                     }).catch(error => {
-                        console.log("Autoplay retry fallback active");
+                        console.log("Autoplay retry fallback active:", error);
                         bgMusic.load();
-                        bgMusic.play();
+                        bgMusic.play().catch(e => console.log("Play failed:", e));
                     });
                 }
             }
@@ -138,7 +139,7 @@
             const content = document.getElementById('modal-content');
             
             if (type === 'music') {
-                pauseMusic(); // Background (Perfect) song pause ho jayega
+                pauseMusic(); 
                 content.innerHTML = `
                     <div class="vinyl-container">
                         <h2 class="title-script" style="color:#900c3f; font-size:2.5rem;">This Song Reminds Me of You 🎶</h2>
