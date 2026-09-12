@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+⁶<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -47,11 +47,12 @@
     </style>
 </head>
 <body>
-    <!-- Multi-source Audio Fallback: Pehle local file aur secondary working cloud stream link -->
+
+    <!-- Direct Cloud Backup Stream Link for Ed Sheeran - Perfect -->
     <audio id="bg-music" loop playsinline preload="auto">
-        <source src="perfect.mp3" type="audio/mpeg">
-        <source src="./perfect.mp3" type="audio/mpeg">
         <source src="https://files.catbox.moe/k3z3vg.mp3" type="audio/mpeg">
+        <source src="perfec.l.mp3" type="audio/mpeg">
+        <source src="perfect.mp3" type="audio/mpeg">
     </audio>
 
     <div id="screen-envelope" class="screen active">
@@ -106,7 +107,7 @@
                     playPromise.then(() => {
                         console.log("Audio playing perfectly!");
                     }).catch(error => {
-                        console.log("Autoplay blocked/failed, trying reload:", error);
+                        console.log("Autoplay retry fallback active");
                         bgMusic.load();
                         bgMusic.play();
                     });
@@ -128,7 +129,7 @@
 
         function goToMenu() { 
             playMusic();
-            document.getElementById('screen-greeting').classList.replace('active', 'hidden'); 
+            document.getElementById('screen-greeting').classList.replace('hidden', 'active'); 
             document.getElementById('screen-menu').classList.replace('hidden', 'active'); 
         }
 
@@ -137,7 +138,7 @@
             const content = document.getElementById('modal-content');
             
             if (type === 'music') {
-                pauseMusic(); // Lover open hote hi Perfect pause hoga
+                pauseMusic(); // Background (Perfect) song pause ho jayega
                 content.innerHTML = `
                     <div class="vinyl-container">
                         <h2 class="title-script" style="color:#900c3f; font-size:2.5rem;">This Song Reminds Me of You 🎶</h2>
@@ -181,9 +182,8 @@
 
         function closeModal() { 
             document.getElementById('modal').classList.remove('open'); 
-            playMusic(); // Lover popup band hote hi Perfect phir se chal jayega
+            playMusic(); 
         }
     </script>
 </body>
 </html>
-
